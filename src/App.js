@@ -22,7 +22,7 @@ function App() {
         console.log("i connected many times");
       });
 
-      socket.on("receiveMessage", message => {
+      socket.on("receive-message", message => {
         console.log("i went here bruh");
         setMessages(prev => [...prev, message]);
       });
@@ -53,10 +53,14 @@ function App() {
       socket.emit("send-message", username, message, currRoom);
     }
     if (name === "join-room") {
-      socket.emit("joinRoom", username, room);
+      socket.emit("join-room", username, room);
       setLoggedIn(true);
       setCurrRoom(room);
       setRoom("");
+    }
+    if (name === "leave-room") {
+      socket.emit("leave-room", username, currRoom);
+      setCurrRoom(room);
     }
   }
 
@@ -90,6 +94,7 @@ function App() {
             <label htmlFor="join-room">Room:
               <input type="text" name="join-room" value={room} onChange={handleChange} />
               <button name="join-room" onClick={handleSubmit}>Join Room</button>
+              <button name="leave-room" onClick={handleSubmit}>Leave Room</button>
             </label>
           </div>
         </div>}
