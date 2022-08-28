@@ -19,11 +19,8 @@ function App() {
     } else {
       socket.on("connect", () => {
         setMessages(prev => [...prev, "You are connected."]);
-        console.log("i connected many times");
       });
-
       socket.on("receive-message", message => {
-        console.log("i went here bruh");
         setMessages(prev => [...prev, message]);
       });
     }
@@ -51,6 +48,7 @@ function App() {
     if (name === "send-message") {
       setMessages(prev => [...prev, `${username}: ${message}`]);
       socket.emit("send-message", username, message, currRoom);
+      setMessage("");
     }
     if (name === "join-room") {
       socket.emit("join-room", username, room);

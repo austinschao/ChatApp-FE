@@ -1,11 +1,13 @@
 .container {
   position: relative;
+  text-align: center;
 }
 
 .messages-container {
   position: absolute;
   left: 50%;
   transform: translate(-50%);
+  text-align: left;
 }
 
 .messages {
